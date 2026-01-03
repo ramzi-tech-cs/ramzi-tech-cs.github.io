@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechLearn - Computer Science & AI Education</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background: #ffffff;
+        }
+
+        header {
+            background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
+            color: white;
+            padding: 1.5rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            color: #4299e1;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .nav-links a:hover {
+            color: #4299e1;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 8rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+            line-height: 1.2;
+            animation: fadeInUp 1s;
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            animation: fadeInUp 1s 0.2s both;
+            line-height: 1.8;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: white;
+            color: #667eea;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: fadeInUp 1s 0.4s both;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 5rem 2rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            color: #1a202c;
+            font-weight: 800;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: #718096;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid #e2e8f0;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+        }
+
+        .card-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .card h3 {
+            color: #2d3748;
+            margin-bottom: 1rem;
+            font-size: 1.6rem;
+            font-weight: 700;
+        }
+
+        .card p {
+            color: #4a5568;
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        .articles-section {
+            background: #f7fafc;
+            padding: 5rem 0;
+        }
+
+        .article {
+            background: white;
+            border-radius: 15px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+            border-left: 5px solid #667eea;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .article:hover {
+            transform: translateX(5px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+        }
+
+        .article h3 {
+            color: #1a202c;
+            margin-bottom: 1rem;
+            font-size: 1.9rem;
+            font-weight: 700;
+        }
+
+        .article-meta {
+            color: #718096;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .article p {
+            color: #4a5568;
+            line-height: 1.9;
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+        }
+
+        .read-more {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: gap 0.3s;
+        }
+
+        .read-more:hover {
+            gap: 1rem;
+        }
+
+        .stats-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 5rem 2rem;
+            text-align: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .stat-item h4 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-item p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .cta-section {
+            background: #2d3748;
+            color: white;
+            padding: 5rem 2rem;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            font-size: 2.8rem;
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+        }
+
+        .cta-section p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .contact-button {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+        }
+
+        .contact-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+            background: #5568d3;
+        }
+
+        footer {
+            background: #1a202c;
+            color: white;
+            text-align: center;
+            padding: 3rem 2rem;
+        }
+
+        footer p {
+            opacity: 0.7;
+            font-size: 1rem;
+        }
+
+        footer .social-links {
+            margin-top: 1.5rem;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        footer .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+
+        footer .social-links a:hover {
+            color: #4299e1;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            .section-title {
+                font-size: 2.2rem;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">Tech<span>Learn</span></div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#topics">Topics</a></li>
+                <li><a href="#articles">Articles</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Master Computer Science & AI</h1>
+            <p>A comprehensive platform dedicated to making programming, artificial intelligence, and computer science accessible to everyone through simplified, professional education.</p>
+            <a href="#topics" class="cta-button">Start Learning</a>
+        </div>
+    </section>
+
+    <section class="container" id="topics">
+        <div class="section-header">
+            <h2 class="section-title">What We Offer</h2>
+            <p class="section-subtitle">Explore our comprehensive curriculum designed to take you from beginner to expert</p>
+        </div>
+        <div class="cards-grid">
+            <div class="card">
+                <span class="card-icon">💻</span>
+                <h3>Programming Fundamentals</h3>
+                <p>Learn essential programming languages including Python, JavaScript, and C++ with a systematic approach suitable for beginners and advanced learners alike.</p>
+            </div>
+            <div class="card">
+                <span class="card-icon">🤖</span>
+                <h3>Artificial Intelligence</h3>
+                <p>Discover the world of AI through practical applications in Machine Learning, Deep Learning, and Neural Networks with hands-on projects.</p>
+            </div>
+            <div class="card">
+                <span class="card-icon">📊</span>
+                <h3>Data Science</h3>
+                <p>Explore data analysis, statistics, and learn to extract valuable insights from big data using industry-standard tools and techniques.</p>
+            </div>
+            <div class="card">
+                <span class="card-icon">🔐</span>
+                <h3>Cybersecurity</h3>
+                <p>Understand cybersecurity fundamentals, encryption, and best practices for protecting systems and information in the digital age.</p>
+            </div>
+            <div class="card">
+                <span class="card-icon">🌐</span>
+                <h3>Web Development</h3>
+                <p>Build professional, responsive websites using HTML, CSS, JavaScript, and modern frameworks with real-world applications.</p>
+            </div>
+            <div class="card">
+                <span class="card-icon">📱</span>
+                <h3>Mobile Development</h3>
+                <p>Create native mobile applications for Android and iOS platforms using cutting-edge technologies and development frameworks.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <h4>100+</h4>
+                    <p>Learning Resources</p>
+                </div>
+                <div class="stat-item">
+                    <h4>50+</h4>
+                    <p>Detailed Tutorials</p>
+                </div>
+                <div class="stat-item">
+                    <h4>Free</h4>
+                    <p>Always Accessible</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="articles-section" id="articles">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Latest Articles</h2>
+                <p class="section-subtitle">In-depth guides and tutorials to accelerate your learning journey</p>
+            </div>
+            
+            <div class="article">
+                <h3>Comprehensive Introduction to Python Programming</h3>
+                <div class="article-meta">
+                    <span>📅 Published January 1, 2026</span>
+                </div>
+                <p>Python stands as one of the most popular programming languages globally due to its simplicity and power. This comprehensive guide covers essential Python fundamentals including variables, loops, functions, and core libraries you will need throughout your programming journey. Whether you are a complete beginner or looking to solidify your foundation, this article provides clear explanations with practical examples.</p>
+                <a href="#" class="read-more">Read More →</a>
+            </div>
+
+            <div class="article">
+                <h3>Understanding Neural Networks in Deep Learning</h3>
+                <div class="article-meta">
+                    <span>📅 Published December 28, 2025</span>
+                </div>
+                <p>Neural networks form the cornerstone of modern artificial intelligence. This article demystifies how neural networks function, from artificial neurons to various layer types and training algorithms. Complex concepts are explained in accessible language with practical examples, making deep learning approachable for learners at all levels. Discover the architecture that powers today's most advanced AI systems.</p>
+                <a href="#" class="read-more">Read More →</a>
+            </div>
+
+            <div class="article">
+                <h3>Search and Sorting Algorithms: A Beginner's Guide</h3>
+                <div class="article-meta">
+                    <span>📅 Published December 25, 2025</span>
+                </div>
+                <p>Search and sorting algorithms represent fundamental concepts in computer science. This guide explores popular algorithms including Binary Search, Quick Sort, and Merge Sort, providing detailed explanations of their mechanics and efficiency comparisons. Understanding these algorithms is essential for developing optimized solutions and excelling in technical interviews. Master these building blocks of computational thinking.</p>
+                <a href="#" class="read-more">Read More →</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section" id="contact">
+        <h2>Begin Your Learning Journey Today</h2>
+        <p>Join thousands of learners worldwide who are developing their skills in programming, artificial intelligence, and computer science through our free educational platform.</p>
+        <a href="mailto:contact@techlearn.com" class="contact-button">Get in Touch</a>
+    </section>
+
+    <footer>
+        <p>© 2026 TechLearn. All rights reserved. A free educational platform dedicated to democratizing technology education.</p>
+        <div class="social-links">
+            <a href="#" aria-label="GitHub">🔗</a>
+            <a href="#" aria-label="LinkedIn">💼</a>
+            <a href="#" aria-label="Twitter">🐦</a>
+        </div>
+    </footer>
+</body>
+              </html>
